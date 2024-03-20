@@ -4,7 +4,12 @@
   "dependencies": {
     "nan": "^2.19.0"
   },
-  "devDependencies": {
-    "tree-sitter-cli": "^0.22.2"
-  }
+  "tree-sitter": [
+    {
+      "scope": "source.corpus",
+      "file-types": [
+        "corpus"
+      ]
+    }
+  ]
 }
