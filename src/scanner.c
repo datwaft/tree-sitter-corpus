@@ -1,12 +1,56 @@
-#include "tree_sitter/alloc.h"
 #include "tree_sitter/parser.h"
 
-#define DELIMITER_SIZE 512
+typedef enum { HEADER_DELIMITER, DELIMITER } TokenType;
 
-enum TokenType { HEADER_DELIMITER, DELIMITER };
+static uint8_t consume_chars(TSLexer *lexer, int32_t c) {
+  uint8_t count = 0;
+  while (lexer->lookahead == c) {
+    lexer->advance(lexer, false);
+    count += 1;
+  }
+  return count;
+}
 
-static inline bool scan_header_delimiter(TSLexer *lexer);
-static inline bool scan_delimiter(TSLexer *lexer);
+static bool parse_header_delimiter(TSLexer *lexer) {
+  lexer->mark_end(lexer);
+
+  uint8_t count = consume_chars(lexer, '=');
+  if (count >= 3) {
+    lexer->mark_end(lexer);
+    lexer->result_symbol = HEADER_DELIMITER;
+    return true;
+  } else {
+    return false;
+  }
+}
+
+static bool parse_delimiter(TSLexer *lexer) {
+  lexer->mark_end(lexer);
+
+  uint8_t count = consume_chars(lexer, '-');
+  if (count >= 3) {
+    lexer->mark_end(lexer);
+    lexer->result_symbol = DELIMITER;
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool tree_sitter_corpus_external_scanner_scan(void *payload, TSLexer *lexer,
+                                              const bool *valid_symbols) {
+  if (valid_symbols[HEADER_DELIMITER] && parse_header_delimiter(lexer)) {
+    return true;
+  }
+  if (valid_symbols[DELIMITER] && parse_delimiter(lexer)) {
+    return true;
+  }
+  return false;
+}
+
+// ==============
+// MEMORY-RELATED
+// ==============
 
 void *tree_sitter_corpus_external_scanner_create() { return NULL; }
 
@@ -20,36 +64,3 @@ unsigned tree_sitter_corpus_external_scanner_serialize(void *payload,
 void tree_sitter_corpus_external_scanner_deserialize(void *payload,
                                                      const char *buffer,
                                                      unsigned length) {}
-
-bool tree_sitter_corpus_external_scanner_scan(void *payload, TSLexer *lexer,
-                                              const bool *valid_symbols) {
-  if (valid_symbols[HEADER_DELIMITER]) {
-    return scan_header_delimiter(lexer);
-  }
-  if (valid_symbols[DELIMITER]) {
-    return scan_delimiter(lexer);
-  }
-
-  // UNREACHABLE
-  return false;
-}
-
-static inline bool scan_header_delimiter(TSLexer *lexer) {
-  while (lexer->lookahead == '=') {
-    lexer->advance(lexer, false);
-  }
-  if (lexer->lookahead == '\n') {
-    return true;
-  }
-  return false;
-}
-
-static inline bool scan_delimiter(TSLexer *lexer) {
-  while (lexer->lookahead == '-') {
-    lexer->advance(lexer, false);
-  }
-  if (lexer->lookahead == '\n') {
-    return true;
-  }
-  return false;
-}

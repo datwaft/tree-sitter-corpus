@@ -2,145 +2,85 @@
   "name": "corpus",
   "rules": {
     "source_file": {
-      "type": "REPEAT",
-      "content": {
-        "type": "SYMBOL",
-        "name": "test"
-      }
-    },
-    "test": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "header"
+          "name": "header_delimiter"
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
         },
         {
           "type": "SYMBOL",
-          "name": "input_source_code"
+          "name": "header_text"
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "header_delimiter"
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code"
         },
         {
           "type": "SYMBOL",
           "name": "delimiter"
-        }
-      ]
-    },
-    "header": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "header_delimiter"
         },
         {
           "type": "STRING",
           "value": "\n"
-        },
-        {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "header_text"
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "\n"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "header_delimiter"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "\n"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         }
       ]
-    },
-    "header_delimiter": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "REPEAT1",
-            "content": {
-              "type": "STRING",
-              "value": "="
-            }
-          },
-          {
-            "type": "REPEAT",
-            "content": {
-              "type": "PATTERN",
-              "value": "\\S"
-            }
-          }
-        ]
-      }
     },
     "header_text": {
       "type": "PATTERN",
       "value": ".+"
     },
-    "input_source_code": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "PATTERN",
-          "value": "(.|\\n)*"
-        }
-      }
-    },
-    "delimiter": {
-      "type": "TOKEN",
+    "code": {
+      "type": "REPEAT1",
       "content": {
         "type": "SEQ",
         "members": [
           {
-            "type": "REPEAT1",
-            "content": {
-              "type": "STRING",
-              "value": "-"
-            }
+            "type": "PATTERN",
+            "value": "[^\\n]*"
           },
           {
-            "type": "REPEAT",
-            "content": {
-              "type": "PATTERN",
-              "value": "\\S"
-            }
+            "type": "STRING",
+            "value": "\n"
           }
         ]
       }
-    },
-    "expected_output_syntax_tree": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "PATTERN",
-          "value": "(.|\\n)*"
-        }
-      }
     }
   },
-  "extras": [],
+  "extras": [
+    {
+      "type": "STRING",
+      "value": "\r"
+    }
+  ],
   "conflicts": [],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "header_delimiter"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "delimiter"
+    }
+  ],
   "inline": [],
   "supertypes": []
 }

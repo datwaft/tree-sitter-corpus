@@ -1,21 +1,22 @@
 module.exports = grammar({
   name: 'corpus',
-  extras: _ => [],
+  extras: _ => ['\r'],
   externals: $ => [$.header_delimiter, $.delimiter],
   rules: {
-    source_file: $ => repeat($.test),
-
-    test: $ => seq($.header),
-
-    header: $ =>
+    source_file: $ =>
       seq(
         $.header_delimiter,
         '\n',
-        field('name', $.header_text),
+        $.header_text,
         '\n',
         $.header_delimiter,
-        optional('\n'),
+        '\n',
+        $.code,
+        $.delimiter,
+        '\n',
       ),
     header_text: _ => /.+/,
+
+    code: $ => repeat1(seq(/[^\n]*/, '\n')),
   },
 });
