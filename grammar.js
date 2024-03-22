@@ -3,7 +3,9 @@ module.exports = grammar({
   extras: _ => ['\r'],
   externals: $ => [$.header_delimiter, $.delimiter],
   rules: {
-    source_file: $ =>
+    source_file: $ => repeat($.test),
+
+    test: $ =>
       seq(
         $.header_delimiter,
         '\n',
@@ -14,9 +16,12 @@ module.exports = grammar({
         $.code,
         $.delimiter,
         '\n',
+        $.syntax_tree,
       ),
     header_text: _ => /.+/,
 
     code: $ => repeat1(seq(/[^\n]*/, '\n')),
+
+    syntax_tree: $ => repeat1(seq(/[^\n]*/, '\n')),
   },
 });

@@ -10,6 +10,26 @@
     "fields": {},
     "children": {
       "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "test",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "syntax_tree",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "test",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -26,6 +46,10 @@
         },
         {
           "type": "header_text",
+          "named": true
+        },
+        {
+          "type": "syntax_tree",
           "named": true
         }
       ]

@@ -2,6 +2,13 @@
   "name": "corpus",
   "rules": {
     "source_file": {
+      "type": "REPEAT",
+      "content": {
+        "type": "SYMBOL",
+        "name": "test"
+      }
+    },
+    "test": {
       "type": "SEQ",
       "members": [
         {
@@ -39,6 +46,10 @@
         {
           "type": "STRING",
           "value": "\n"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "syntax_tree"
         }
       ]
     },
@@ -47,6 +58,22 @@
       "value": ".+"
     },
     "code": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[^\\n]*"
+          },
+          {
+            "type": "STRING",
+            "value": "\n"
+          }
+        ]
+      }
+    },
+    "syntax_tree": {
       "type": "REPEAT1",
       "content": {
         "type": "SEQ",
