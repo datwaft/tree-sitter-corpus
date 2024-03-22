@@ -6,8 +6,8 @@
 
 enum TokenType { HEADER_DELIMITER, DELIMITER };
 
-bool scan_header_delimiter(char *delimiter, TSLexer *lexer);
-bool scan_delimiter(char *delimiter, TSLexer *lexer);
+static inline bool scan_header_delimiter(char *delimiter, TSLexer *lexer);
+static inline bool scan_delimiter(char *delimiter, TSLexer *lexer);
 
 void *tree_sitter_corpus_external_scanner_create() {
   return ts_malloc(sizeof(char) * DELIMITER_SIZE);
@@ -44,7 +44,7 @@ bool tree_sitter_corpus_external_scanner_scan(void *payload, TSLexer *lexer,
   return false;
 }
 
-bool scan_header_delimiter(char *delimiter, TSLexer *lexer) {
+static inline bool scan_header_delimiter(char *delimiter, TSLexer *lexer) {
   while (lexer->lookahead == '=') {
     lexer->advance(lexer, false);
   }
@@ -54,7 +54,7 @@ bool scan_header_delimiter(char *delimiter, TSLexer *lexer) {
   return false;
 }
 
-bool scan_delimiter(char *delimiter, TSLexer *lexer) {
+static inline bool scan_delimiter(char *delimiter, TSLexer *lexer) {
   while (lexer->lookahead == '-') {
     lexer->advance(lexer, false);
   }
