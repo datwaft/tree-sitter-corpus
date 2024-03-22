@@ -1,17 +1,11 @@
 module.exports = grammar({
   name: 'corpus',
   extras: _ => [],
+  externals: $ => [$.header_delimiter, $.delimiter],
   rules: {
     source_file: $ => repeat($.test),
 
-    test: $ =>
-      seq(
-        $.header,
-        $.input_source_code,
-        $.delimiter,
-        // '\n',
-        // $.expected_output_syntax_tree,
-      ),
+    test: $ => seq($.header),
 
     header: $ =>
       seq(
@@ -22,13 +16,6 @@ module.exports = grammar({
         $.header_delimiter,
         optional('\n'),
       ),
-    header_delimiter: _ => token(seq(repeat1('='), repeat(/\S/))),
     header_text: _ => /.+/,
-
-    input_source_code: _ => token(prec(-1, /(.|\n)*/)),
-
-    delimiter: _ => token(seq(repeat1('-'), repeat(/\S/))),
-
-    expected_output_syntax_tree: _ => token(prec(-1, /(.|\n)*/)),
   },
 });
