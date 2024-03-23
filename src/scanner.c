@@ -1,6 +1,12 @@
+#include "tree_sitter/alloc.h"
+#include "tree_sitter/array.h"
 #include "tree_sitter/parser.h"
 
 typedef enum { HEADER_DELIMITER, DELIMITER } TokenType;
+
+typedef struct {
+  Array(int32_t) * delimiter;
+} Scanner;
 
 static uint8_t consume_chars(TSLexer *lexer, int32_t c) {
   uint8_t count = 0;
@@ -52,15 +58,39 @@ bool tree_sitter_corpus_external_scanner_scan(void *payload, TSLexer *lexer,
 // MEMORY-RELATED
 // ==============
 
-void *tree_sitter_corpus_external_scanner_create() { return NULL; }
+void *tree_sitter_corpus_external_scanner_create() {
+  Scanner *s = (Scanner *)ts_malloc(sizeof(Scanner));
+  s->delimiter = ts_malloc(sizeof(Array(int32_t)));
+  array_init(s->delimiter);
+  return s;
+}
 
-void tree_sitter_corpus_external_scanner_destroy(void *payload) {}
+void tree_sitter_corpus_external_scanner_destroy(void *payload) {
+  Scanner *s = (Scanner *)payload;
+  for (size_t i = 0; i < s->delimiter->size; ++i) {
+    ts_free(array_get(s->delimiter, i));
+  }
+  array_delete(s->delimiter);
+  ts_free(s);
+}
 
 unsigned tree_sitter_corpus_external_scanner_serialize(void *payload,
                                                        char *buffer) {
-  return 0;
+  Scanner *s = (Scanner *)payload;
+  unsigned size = 0;
+  for (size_t i = 0; i < s->delimiter->size; ++i) {
+    buffer[size++] = *array_get(s->delimiter, i);
+  }
+  return size;
 }
 
 void tree_sitter_corpus_external_scanner_deserialize(void *payload,
                                                      const char *buffer,
-                                                     unsigned length) {}
+                                                     unsigned length) {
+  Scanner *s = (Scanner *)payload;
+  array_init(s->delimiter);
+  size_t size = 0;
+  while (size < length) {
+    array_push(s->delimiter, buffer[size++]);
+  }
+}
