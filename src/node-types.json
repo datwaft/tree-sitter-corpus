@@ -1,8 +1,36 @@
 [
   {
+    "type": "attribute",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "code",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "header_delimiter",
+          "named": true
+        },
+        {
+          "type": "header_text",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "source_file",
@@ -13,7 +41,7 @@
       "required": false,
       "types": [
         {
-          "type": "test",
+          "type": "test_block",
           "named": true
         }
       ]
@@ -25,7 +53,7 @@
     "fields": {}
   },
   {
-    "type": "test",
+    "type": "test_block",
     "named": true,
     "fields": {},
     "children": {
@@ -41,11 +69,7 @@
           "named": true
         },
         {
-          "type": "header_delimiter",
-          "named": true
-        },
-        {
-          "type": "header_text",
+          "type": "header",
           "named": true
         },
         {
@@ -57,6 +81,10 @@
   },
   {
     "type": "\n",
+    "named": false
+  },
+  {
+    "type": ":",
     "named": false
   },
   {

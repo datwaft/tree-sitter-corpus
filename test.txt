@@ -1,5 +1,6 @@
 =================||
 pepito
+:fail-fast
 =================||
 
 int foo() {
@@ -20,6 +21,10 @@ int foo() {
 
 =================||
 juanito
+
+
+:fail-fast
+:language(c)
 =================||
 
 int foo() {
