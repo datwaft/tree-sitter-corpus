@@ -1,12 +1,12 @@
-=================
+=================||
 pepito
-=================
+=================||
 
 int foo() {
   return 1;
 }
 
-------------------
+------------------||
 
 (translation_unit
   (function_definition
@@ -18,15 +18,15 @@ int foo() {
       (return_statement
         (number_literal)))))
 
-=================
+=================||
 juanito
-=================
+=================||
 
 int foo() {
   return 1;
 }
 
-------------------
+------------------||
 
 (translation_unit
   (function_definition
