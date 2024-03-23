@@ -1,3 +1,7 @@
+=================================+++
+An example from the documentation
+=================================+++
+
 =========================
 Test that will be skipped
 :skip
@@ -37,3 +41,46 @@ Test that will parse with both Typescript and TSX
 console.log('Hello, world!');
 
 -------------------------------------------------
+
+---------------------------------+++
+
+(source_file
+  (test_block
+    (header
+      (header_delimiter)
+      (header_text)
+      (attribute)
+      (header_delimiter))
+    (code)
+    (delimiter)
+    (syntax_tree))
+  (test_block
+    (header
+      (header_delimiter)
+      (header_text)
+      (attribute)
+      (attribute)
+      (header_delimiter))
+    (code)
+    (delimiter)
+    (syntax_tree))
+  (test_block
+    (header
+      (header_delimiter)
+      (header_text)
+      (attribute)
+      (attribute)
+      (header_delimiter))
+    (code)
+    (delimiter)
+    (syntax_tree))
+  (test_block
+    (header
+      (header_delimiter)
+      (header_text)
+      (attribute)
+      (attribute)
+      (header_delimiter))
+    (code)
+    (delimiter)
+    (syntax_tree)))

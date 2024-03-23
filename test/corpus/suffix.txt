@@ -1,0 +1,31 @@
+=================================+++
+An example from the documentation
+=================================+++
+
+==================|||
+Basic module
+==================|||
+
+---- MODULE Test ----
+increment(n) == n + 1
+====
+
+---|||
+
+(source_file
+  (module (identifier)
+    (operator (identifier)
+      (parameter_list (identifier))
+      (plus (identifier_ref) (number)))))
+
+---------------------------------+++
+
+(source_file
+  (test_block
+    (header
+      (header_delimiter)
+      (header_text)
+      (header_delimiter))
+    (code)
+    (delimiter)
+    (syntax_tree)))

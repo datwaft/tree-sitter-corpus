@@ -5,7 +5,15 @@ module.exports = grammar({
   rules: {
     source_file: $ => repeat($.test_block),
 
-    test_block: $ => seq($.header, $.code, $.delimiter, '\n', $.syntax_tree),
+    test_block: $ =>
+      seq(
+        repeat('\n'),
+        $.header,
+        $.code,
+        $.delimiter,
+        optional('\n'),
+        $.syntax_tree,
+      ),
     header: $ =>
       seq(
         $.header_delimiter,
