@@ -2,7 +2,21 @@
   {
     "type": "attribute",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "language",
+          "named": true
+        },
+        {
+          "type": "platform",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "code",
@@ -84,7 +98,31 @@
     "named": false
   },
   {
-    "type": ":",
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": ":error",
+    "named": false
+  },
+  {
+    "type": ":fail-fast",
+    "named": false
+  },
+  {
+    "type": ":language",
+    "named": false
+  },
+  {
+    "type": ":platform",
+    "named": false
+  },
+  {
+    "type": ":skip",
     "named": false
   },
   {
@@ -97,6 +135,14 @@
   },
   {
     "type": "header_text",
+    "named": true
+  },
+  {
+    "type": "language",
+    "named": true
+  },
+  {
+    "type": "platform",
     "named": true
   }
 ]

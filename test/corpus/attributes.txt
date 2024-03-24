@@ -58,8 +58,10 @@ console.log('Hello, world!');
     (header
       (header_delimiter)
       (header_text)
-      (attribute)
-      (attribute)
+      (attribute
+        (platform))
+      (attribute
+        (platform))
       (header_delimiter))
     (code)
     (delimiter)
@@ -78,8 +80,10 @@ console.log('Hello, world!');
     (header
       (header_delimiter)
       (header_text)
-      (attribute)
-      (attribute)
+      (attribute
+        (language))
+      (attribute
+        (language))
       (header_delimiter))
     (code)
     (delimiter)

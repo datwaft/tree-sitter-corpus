@@ -109,15 +109,71 @@
       "value": ".+"
     },
     "attribute": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
           "type": "STRING",
-          "value": ":"
+          "value": ":skip"
         },
         {
-          "type": "PATTERN",
-          "value": "\\S+"
+          "type": "STRING",
+          "value": ":error"
+        },
+        {
+          "type": "STRING",
+          "value": ":fail-fast"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ":language"
+            },
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[^)]*"
+              },
+              "named": true,
+              "value": "language"
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ":platform"
+            },
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[^)]*"
+              },
+              "named": true,
+              "value": "platform"
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
         }
       ]
     },

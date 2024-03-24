@@ -25,7 +25,14 @@ module.exports = grammar({
         optional('\n'),
       ),
     header_text: _ => /.+/,
-    attribute: _ => seq(':', /\S+/),
+    attribute: $ =>
+      choice(
+        ':skip',
+        ':error',
+        ':fail-fast',
+        seq(':language', '(', alias(/[^)]*/, $.language), ')'),
+        seq(':platform', '(', alias(/[^)]*/, $.platform), ')'),
+      ),
 
     code: $ => repeat1(seq(/[^\n]*/, '\n')),
 
