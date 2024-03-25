@@ -34,8 +34,8 @@ module.exports = grammar({
         seq(':platform', '(', alias(/[^)]*/, $.platform), ')'),
       ),
 
-    code: $ => repeat1(seq(/[^\n]*/, '\n')),
+    code: _ => repeat1(seq(/[^\n]*/, '\n')),
 
-    syntax_tree: $ => repeat1(seq(/[^\n]*/, '\n')),
+    syntax_tree: _ => repeat1(seq(/[^\n]*/, '\n')),
   },
 });
