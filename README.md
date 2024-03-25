@@ -22,7 +22,7 @@ The grammar contains its own queries and configures itself, so you don't need to
 
 ## Screenshots?
 
-Here are some screenshots (my colorscheme is [cattpuccin](https://github.com/catppuccin/nvim), my terminal is [Wezterm](https://wezfurlong.org/wezterm/index.html) and my font is [Iosevka](https://github.com/be5invis/Iosevka)):
+Here are some screenshots (my colorscheme is [catppuccin](https://github.com/catppuccin/nvim), my terminal is [Wezterm](https://wezfurlong.org/wezterm/index.html) and my font is [Iosevka](https://github.com/be5invis/Iosevka)):
 
 ![](https://github.com/datwaft/tree-sitter-corpus/assets/37723586/d4a5aee1-6631-48f5-83b2-deb9ecbe3925)
 
