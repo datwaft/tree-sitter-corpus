@@ -1,9 +1,8 @@
 ((syntax_tree) @injection.content
  (#set! injection.language "query"))
 
-((test_block
+(test_block
   (header
     (attribute
-      (language) @_lang))
+      (language) @injection.language))
   (code) @injection.content)
- (#set-lang-from-info-string! @_lang))
